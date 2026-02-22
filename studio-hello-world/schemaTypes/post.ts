@@ -12,16 +12,29 @@ export const post = defineType({
     }),
     defineField({
       name: 'body',
-      type: 'array',
-      of: [{type: 'block'}],
+      type: 'text',
       validation: (Rule) => Rule.required(),
     }),
-
+    defineField({
+      name: 'image',
+      type: 'image',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'publishedAt',
+      type: 'date',
+      validation: (Rule) => Rule.required(),
+    }),
     defineField({
       name: 'author',
       type: 'reference',
-      to: [{type: 'user'}],
+      to: [{type: 'authors'}],
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'tags',
+      type: 'reference',
+      to: [{type: 'tags'}],
     }),
   ],
 })

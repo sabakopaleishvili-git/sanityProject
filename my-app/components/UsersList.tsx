@@ -1,10 +1,10 @@
 import { sanityClient } from "@/src/sanity/lib/client";
-import { userQuery } from "@/src/sanity/querys/user";
+import { userQuery } from "@/src/sanity/querys/authors";
 import Image from "next/image";
 
 const UsersList = async () => {
   const users = await sanityClient.fetch(userQuery);
-  console.log(users[0].image);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {users.map((user: any) => (

@@ -1,4 +1,5 @@
 import {post} from './post'
-import {user} from './user'
+import {authors} from './authors'
+import {tags} from './tags'
 
-export const schemaTypes = [user, post]
+export const schemaTypes = [authors, post, tags]
