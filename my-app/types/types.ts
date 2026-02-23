@@ -23,7 +23,8 @@ export type Tag = {
 export type Post = {
   _id: string;
   title: string;
-  body?: string;
+  slug?: { _type: string; current: string };
+  description?: string;
   image?: {
     asset?: {
       url?: string;

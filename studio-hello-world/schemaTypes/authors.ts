@@ -1,9 +1,11 @@
-import {defineField, defineType} from 'sanity'
+import {UsersIcon} from '@sanity/icons'
+import {defineField, defineType, EmailInput} from 'sanity'
 
 export const authors = defineType({
   name: 'authors',
   title: 'Authors',
   type: 'document',
+  icon: UsersIcon,
   fields: [
     defineField({
       name: 'name',
@@ -35,4 +37,17 @@ export const authors = defineType({
       validation: (Rule) => Rule.required(),
     }),
   ],
+  preview: {
+    select: {
+      name: 'name',
+      lastName: 'lastName',
+      email: 'email',
+      role: 'role',
+      media: 'image',
+    },
+    prepare(selection) {
+      const {name, lastName, email, media, role} = selection
+      return {title: `${name} ${lastName}`, subtitle: `${role} - ${email}`, media}
+    },
+  },
 })

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { sanityClient } from "@/src/sanity/lib/client";
 import { singlePostQuery } from "@/src/sanity/querys/posts";
 import { Post } from "@/types/types";
@@ -12,15 +11,13 @@ const formatDate = (date: string) =>
     day: "numeric",
   });
 
-const PostPage = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params;
+const PostPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
 
-  const post = await sanityClient.fetch<Post | null>(singlePostQuery, {
-    id,
-  });
+  const post = await sanityClient.fetch<Post | null>(singlePostQuery, { slug });
 
   if (!post) {
-    notFound();
+    return <div>Post not found</div>;
   }
 
   return (
@@ -65,7 +62,7 @@ const PostPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
         <section className="mb-8 rounded-2xl border border-slate-800 bg-slate-900 p-6 md:p-8">
           <div className="prose prose-invert prose-slate max-w-none">
-            <p>{post.body}</p>
+            <p>{post.description}</p>
           </div>
         </section>
         <Link href={`/users/${post.author?._id}`}>

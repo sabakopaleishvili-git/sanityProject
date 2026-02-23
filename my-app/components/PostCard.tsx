@@ -18,7 +18,7 @@ interface IProps {
 const PostCard = ({ post, hasAuthor = false }: IProps) => {
   return (
     <Link
-      href={`/posts/${post._id}`}
+      href={`/posts/${post.slug?.current}`}
       className="group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-lg shadow-slate-950/40 transition hover:-translate-y-1 hover:border-slate-600"
     >
       <div className="relative h-52 w-full">
@@ -43,7 +43,9 @@ const PostCard = ({ post, hasAuthor = false }: IProps) => {
         <h2 className="line-clamp-2 text-xl font-semibold text-white">
           {post.title}
         </h2>
-        <p className="line-clamp-3 text-sm text-slate-300">{post.body}</p>
+        <p className="line-clamp-3 text-sm text-slate-300">
+          {post.description}
+        </p>
 
         {hasAuthor && (
           <div className="flex items-center gap-3 border-t border-slate-800 pt-4">

@@ -3,7 +3,8 @@ import groq from "groq";
 export const postsQuery = groq`*[_type == "post"] | order(publishedAt desc){
     _id,
     title,
-    body,
+    slug,
+    description,
     image{
         asset->{
             url
@@ -27,10 +28,11 @@ export const postsQuery = groq`*[_type == "post"] | order(publishedAt desc){
     }
 }`;
 
-export const singlePostQuery = groq`*[_type == "post" && _id == $id][0]{
+export const singlePostQuery = groq`*[_type == "post" && slug.current == $slug][0]{
     _id,
     title,
-    body,
+    description,
+    slug,
     image{
         asset->{
             url
